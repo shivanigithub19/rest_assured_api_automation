@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  Built in 2022-03-24 10:53 by logback-translator            -->
+<!--                                                             -->
+<!--  For sponsoring SLF4J/logback/reload4j projects see         -->
+<!--    https://github.com/sponsors/qos-ch                       -->
+<!--                                                             -->
+<configuration scan="true" debug = "true">
+  <appender name="file" class="ch.qos.logback.core.FileAppender">
+    <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+    <File>${user.dir}/logs/restAPI.log</File>
+	<append>true</append>
+    <immediateFlush>true</immediateFlush>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <maxIndex>10</maxIndex>
+      <FileNamePattern>${user.dir}/logs/restAPI.log.%i</FileNamePattern>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>10MB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+  <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <Target>System.out</Target>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</pattern>
+    </encoder>
+  </appender>
+<logger name="com.sematext.blog">
+        <appender-ref ref="console"/>
+    </logger>
+  <root level="INFO">
+    <appender-ref ref="file"/>
+    <appender-ref ref="stdout"/>
+  </root>
+</configuration>
